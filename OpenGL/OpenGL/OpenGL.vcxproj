@@ -122,6 +122,7 @@
     <ClInclude Include="winmain.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="3DFunction.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

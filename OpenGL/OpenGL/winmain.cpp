@@ -1,9 +1,10 @@
 #include "winmain.h"
-#include "gl/GL.h"
-#include "gl/glu.h"
-#include "gl/GLAUX.H"
+#include "3DFunction.h"
+
 
 HINSTANCE g_hInst;
+HDC hdc;
+HGLRC hrc;
 
 void SetupPixelFormat(HDC hdc)
 {
@@ -78,6 +79,39 @@ HWND CreateWnd(char* className,char* title, int w, int h, void* wndProc)
 };
 LRESULT  CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+
+	switch (uMsg)
+	{
+	case WM_CREATE:
+	{
+		hdc = GetDC(hWnd);//获取窗口的设置句柄
+		SetupPixelFormat(hdc);//设置窗口像素格式
+
+		hrc = wglCreateContext(hdc);//创建渲染环境
+		wglMakeCurrent(hdc, hrc);//设定当前设备的环境以及当前的渲染环境
+
+		SetupMatrices(640, 480);
+
+		InitOpenGL();
+
+		SetTimer(hWnd, 1, 1, NULL);
+
+	}break;
+
+	case  WM_TIMER:
+	{
+		Render();
+		SwapBuffers(hdc);
+
+	}break;
+		 
+		 
+
+
+	}
+
+
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 
 };
+
