@@ -120,6 +120,9 @@
   <ItemGroup>
     <ClInclude Include="winmain.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="winmain.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

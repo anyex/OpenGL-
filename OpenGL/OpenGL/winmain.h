@@ -1,7 +1,9 @@
 #pragma once
 #include "windows.h"
 
-int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
-{
 
-}
+HWND CreateWnd(char* className, char* WndTitle, int w, int h,void* wndProc);
+
+void ShowWnd(HWND hwnd);
+
+LRESULT  CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
