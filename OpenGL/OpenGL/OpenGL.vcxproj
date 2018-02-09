@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="3DFunction.h" />
     <ClInclude Include="winmain.h" />
   </ItemGroup>
   <ItemGroup>
