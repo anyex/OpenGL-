@@ -21,6 +21,7 @@ void ShowWnd(HWND hwnd)
 	UpdateWindow(hwnd);
 
 	MSG msg;
+
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
 		TranslateMessage(&msg);
