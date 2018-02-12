@@ -6,6 +6,9 @@ float route_angle = 0;
 float armAngle[2] = { 0 };
 float legAngle[2] = { 0 };
 float angle = 0;
+GLuint texture;
+AUX_RGBImageRec* textureImage[1];
+
 void SetupMatrices(int w, int h)
 {
 	glMatrixMode(GL_PROJECTION);
@@ -25,11 +28,11 @@ void InitOpenGL()
 	glEnable(GL_DEPTH_TEST);
 
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-
-	
+	glEnable(GL_TEXTURE_2D);
+	LoadGLTextures("timg.bmp");
 }
 
-void Render()
+/*void Render1()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//清除当前缓冲区的值
 
@@ -109,7 +112,7 @@ void Render()
 		glEnd();*/
 		
 	//绘制机器人
-	glPushMatrix();
+	/*glPushMatrix();
 	glTranslatef(0.0f, 8.0f, -30.f);
 	glRotatef(angle, 0.0f, 1.0f, 0.0f);
 	RenderRobert(0.0f, 0.0f, 0.0f);
@@ -121,7 +124,7 @@ void Render()
 	{
 		angle = 0.0f;
 	}
-}
+}*/
 
 //画一个机器人
 void RenderRobert(float xPos,float yPos,float zPos)
@@ -324,5 +327,55 @@ void DrawLeg(float xPos, float yPos, float zPos)
 		DrawCube(0.0f, 0.0f, 0.0f);
 	glPopMatrix();
 }
+//渲染纹理对象
+void Render()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glLoadIdentity();
+	gluLookAt(0.0f, 0.0f, 0.0f,
+		0.0f, 0.0f, -100.0f,
+		0.0f, 1.0f, 0.0f);
+	
+	glTranslatef(0, 0, -5);
+	
+	glBegin(GL_QUADS);//绘制四边形
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.0f, -2.0f, 2.0f);
+	glTexCoord2f(3.0f, 0.0f); glVertex3f(2.0f, -2.0f, 2.0f);
+	glTexCoord2f(3.0f, 3.0f); glVertex3f(2.0f, 2.0f, 2.0f);
+	glTexCoord2f(0.0f, 3.0f); glVertex3f(-2.0f, 2.0f, 2.0f);
+	glEnd();
+
+}
+
+//加载纹理
+int LoadGLTextures(char* filename)
+{
+	int status = FALSE;
+	
+	
+	//判断纹理图是否保存成功，并保存在textureImage中
+	if (textureImage[0] = auxDIBImageLoad(TEXT(filename)))
+	{
+		status = TRUE;
+		glGenTextures(1, &texture);
+		//绑定纹理
+
+		glBindTexture(GL_TEXTURE_2D, texture);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 
+		//指定纹理
+		glTexImage2D(GL_TEXTURE_2D, 0, 3,
+			textureImage[0]->sizeX,
+			textureImage[0]->sizeY,
+			0, GL_RGB, GL_UNSIGNED_BYTE,
+			textureImage[0]->data);
+	
+	}
+
+	return status;
+
+
+}

@@ -1,9 +1,8 @@
 #pragma once
 #include "windows.h"
 #include "gl/GL.H"
-#include "gl/GLAUX.H"
+#include "gl/glaux.h"
 #include "gl/GLUT.H"
-
 void SetupMatrices(int w, int h);
 void InitOpenGL();
 void Render();
@@ -13,3 +12,4 @@ void RenderRobert(float xPos, float yPos, float zPos);
 void DrawLeg(float xPos, float yPos, float zPos);
 void DrawTorso(float xPos, float yPos, float zPos);
 void DrawHead(float xPos, float yPos, float zPos);
+int LoadGLTextures(char* filename);//º”‘ÿŒ∆¿Ì
