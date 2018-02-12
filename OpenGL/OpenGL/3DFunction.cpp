@@ -339,11 +339,12 @@ void Render()
 	glTranslatef(0, 0, -5);
 	
 	glBegin(GL_QUADS);//绘制四边形
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.0f, -2.0f, 2.0f);
-	glTexCoord2f(3.0f, 0.0f); glVertex3f(2.0f, -2.0f, 2.0f);
-	glTexCoord2f(3.0f, 3.0f); glVertex3f(2.0f, 2.0f, 2.0f);
-	glTexCoord2f(0.0f, 3.0f); glVertex3f(-2.0f, 2.0f, 2.0f);
+	glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.0f, -2.0f, 2.0f);//指定纹理左下角
+	glTexCoord2f(1.0f, 0.0f); glVertex3f(2.0f, -2.0f, 2.0f);
+	glTexCoord2f(1.0f, 1.0f); glVertex3f(2.0f, 2.0f, 2.0f);
+	glTexCoord2f(0.0f, 1.0f); glVertex3f(-2.0f, 2.0f, 2.0f);
 	glEnd();
+	//glTexCoord2f(x,y)设置纹理坐标，因为纹理的范围是0-1,当x,y超过这个范围时，就会在s方向上重复x次，t方向上重复y次
 
 }
 
@@ -362,8 +363,8 @@ int LoadGLTextures(char* filename)
 
 		glBindTexture(GL_TEXTURE_2D, texture);
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 
 		//指定纹理
@@ -379,3 +380,24 @@ int LoadGLTextures(char* filename)
 
 
 }
+/************************************************************************/
+/* 纹理总结
+  1.使用glEnable(GL_TEXTURE_2D);开启纹理
+  2.加载纹理资源
+  3.产生纹理ID号 glGenTextures(1, &texture);
+ 
+  4 绑定纹理  glBindTexture(GL_TEXTURE_2D, texture);
+  5.控制纹理
+		 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+
+  6.指定纹理
+		glTexImage2D(GL_TEXTURE_2D, 0, 3,
+				 textureImage[0]->sizeX,
+				 textureImage[0]->sizeY,
+				 0, GL_RGB, GL_UNSIGNED_BYTE,
+				 textureImage[0]->data);
+
+*/
+/************************************************************************/
