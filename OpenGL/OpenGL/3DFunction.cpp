@@ -36,7 +36,7 @@ void Render()
 	glLoadIdentity();
 	gluLookAt(0.0f, .0f, 2.0f,
 		0.0f, 0.0f, 1.0f,
-		0.0f, 1.0f, 3.0f);//改变观察变换，这里将会得到一个倒立的图像
+		0.f, 2.0f, 0.0f);//改变观察变换，这里将会得到一个倒立的图像
 
 	
 	/*glPushMatrix();//使用矩阵堆栈就只对下面的一个点进行了平移
@@ -110,7 +110,7 @@ void Render()
 		
 	//绘制机器人
 	glPushMatrix();
-	glTranslatef(0.0f, 0.0f, -30.f);
+	glTranslatef(0.0f, 8.0f, -30.f);
 	glRotatef(angle, 0.0f, 1.0f, 0.0f);
 	RenderRobert(0.0f, 0.0f, 0.0f);
 	glPopMatrix();
@@ -139,16 +139,16 @@ void RenderRobert(float xPos,float yPos,float zPos)
 	glPushMatrix();
 		if (arm1)
 		
-			armAngle[0] = armAngle[0] + 0.1f;
+			armAngle[0] = armAngle[0] + 0.05f;
 		else
-			armAngle[0] = armAngle[0] - 0.1f;
+			armAngle[0] = armAngle[0] - 0.05f;
 
 		//如果胳膊达到其最大的角度则改变其状态
-		if (armAngle[0]>=15.0f)
+		if (armAngle[0]>=1.0f)
 		{
 			arm1 = false;
 		}
-		if (armAngle[0]<=-15.0f)
+		if (armAngle[0]<=-1.0f)
 		{
 			arm1 = true;
 		}
@@ -156,14 +156,15 @@ void RenderRobert(float xPos,float yPos,float zPos)
 		//平移并旋转后绘制胳膊
 		glTranslatef(0.0f, -0.5f, 0.0f);
 		glRotatef(armAngle[0], 1.0f, 0.0f, 0.0f);
-		DrawArm(2.5f, 0.0f, -0.5f);
+		DrawArm(1.5f,0.8f, -0.9f);
+
 	glPopMatrix();
 		
 
 	glPushMatrix();
 	glTranslatef(xPos, yPos, zPos);
 	DrawHead(1.0f, 2.0f, 0.0f);
-	DrawTorso(1.5f, 0.0f, 0.0f);
+	DrawTorso(1.0f, 0.5f, 0.0f);
 	glPushMatrix();
 	if (arm2)
 
@@ -172,11 +173,11 @@ void RenderRobert(float xPos,float yPos,float zPos)
 		armAngle[1] = armAngle[1] - 0.1f;
 
 	//如果胳膊达到其最大的角度则改变其状态
-	if (armAngle[1] >= 15.0f)
+	if (armAngle[1] >= 1.0f)
 	{
 		arm2 = false;
 	}
-	if (armAngle[1] <= -15.0f)
+	if (armAngle[1] <= -1.0f)
 	{
 		arm2 = true;
 	}
@@ -184,7 +185,7 @@ void RenderRobert(float xPos,float yPos,float zPos)
 	//平移并旋转后绘制胳膊
 	glTranslatef(0.0f, -0.5f, 0.0f);
 	glRotatef(armAngle[1], 1.0f, 0.0f, 0.0f);
-	DrawArm(-1.5f, 0.0f, -0.5f);
+		DrawArm(-1.5f, 0.5f, -0.5f);
 	glPopMatrix();
 
 	//绘制腿部
@@ -208,7 +209,7 @@ void RenderRobert(float xPos,float yPos,float zPos)
 
 	glTranslatef(0.0f, -0.5f, 0.0f);
 	glRotatef(legAngle[0], 1.0f, 0.0f, 0.0f);
-	DrawLeg(-0.5f, -0.5f, -0.5f);
+	DrawLeg(-0.5f, -5.0f, -0.5f);
 
 	glPopMatrix();
 
@@ -289,7 +290,7 @@ void DrawArm(float xPos, float yPos, float zPos)
 	glPushMatrix();
 		glColor3f(1.0f, 0.0f, 0.0f);
 		glTranslatef(xPos, yPos, zPos);
-		glScalef(1.0f, 4.0f, 1.0f);
+		glScalef(0.5f, 1.0f, 0.5f);
 		DrawCube(0.0f, 0.0f, 0.f);
 	glPushMatrix();
 }
