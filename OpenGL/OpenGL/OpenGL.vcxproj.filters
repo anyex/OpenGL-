@@ -21,12 +21,18 @@
     <ClInclude Include="3DFunction.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="MD2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="winmain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="3DFunction.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MD2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

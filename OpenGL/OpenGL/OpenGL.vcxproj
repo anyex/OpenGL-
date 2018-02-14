@@ -74,6 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -120,10 +121,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="3DFunction.h" />
+    <ClInclude Include="MD2.h" />
     <ClInclude Include="winmain.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3DFunction.cpp" />
+    <ClCompile Include="MD2.cpp" />
     <ClCompile Include="winmain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,6 +1,7 @@
 #include "3DFunction.h"
+#include "MD2.h"
 
-
+modelData_t* myModel;
 float move_s = 0.0f;
 float route_angle = 0;
 float armAngle[2] = { 0 };
@@ -17,7 +18,7 @@ void SetupMatrices(int w, int h)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-
+	
 }
 
 void InitOpenGL()
@@ -29,7 +30,8 @@ void InitOpenGL()
 
 	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	glEnable(GL_TEXTURE_2D);
-	LoadGLTextures("timg.bmp");
+	//LoadGLTextures("timg.bmp");
+	myModel = LoadMD2Model("chastity.md2", "chastity.bmp");
 }
 
 /*void Render1()
@@ -332,18 +334,14 @@ void Render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	gluLookAt(0.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, -100.0f,
+	gluLookAt(0.0f, 2.0f, 50.0f,
+		0.0f, 10.0f, -50.0f,
 		0.0f, 1.0f, 0.0f);
+	glPushMatrix();
+	DisplayMD2(myModel, 40);
+	glPopMatrix();
+
 	
-	glTranslatef(0, 0, -5);
-	
-	glBegin(GL_QUADS);//绘制四边形
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-2.0f, -2.0f, 2.0f);//指定纹理左下角
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(2.0f, -2.0f, 2.0f);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(2.0f, 2.0f, 2.0f);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-2.0f, 2.0f, 2.0f);
-	glEnd();
 	//glTexCoord2f(x,y)设置纹理坐标，因为纹理的范围是0-1,当x,y超过这个范围时，就会在s方向上重复x次，t方向上重复y次
 
 }
